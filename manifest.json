@@ -1,0 +1,11 @@
+{
+	"id": "obsidian-xlog",
+	"name": "xLog",
+	"version": "0.1.0",
+	"minAppVersion": "0.15.0",
+	"description": "Obsidian plugin for interacting with xLog.",
+	"author": "xLog",
+	"authorUrl": "https://xlog.app",
+	"fundingUrl": "https://github.com/Crossbell-Box/xLog",
+	"isDesktopOnly": false
+}

@@ -1,0 +1,134 @@
+.view__loading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+.view__loading-logo-wrapper {
+	animation: spin 2s cubic-bezier(0.2, 0.8, 0.4, 1) 1s infinite;
+}
+.view__loading-logo {
+	width: 100px;
+	height: 100px;
+	animation: shake-bounce 1.5s ease-in-out infinite;
+}
+@keyframes shake-bounce {
+	0% {
+		transform: rotate(0deg) scale(1);
+	}
+	25% {
+		transform: rotate(6deg) scale(1.1);
+	}
+	50% {
+		transform: rotate(-4deg) scale(0.9);
+	}
+	75% {
+		transform: rotate(2deg) scale(1.05);
+	}
+	100% {
+		transform: rotate(0deg) scale(1);
+	}
+}
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	10% {
+		transform: rotate(-30deg);
+	}
+	30% {
+		transform: rotate(370deg);
+	}
+	40% {
+		transform: rotate(355deg);
+	}
+	50% {
+		transform: rotate(360deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.view__site-info {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-gap: 1rem;
+}
+.view__site-info-img-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.view__site-info-img {
+	width: 100%;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: 0.25rem;
+	object-fit: cover;
+}
+.view__site-info-name {
+	font-size: 1.5rem;
+	font-weight: 500;
+	margin: 0.25rem 0;
+}
+.view__site-info-bio {
+	color: var(--text-muted);
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.view__posts {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	grid-gap: 1rem;
+	margin: 1rem 0;
+}
+.view__post {
+	padding: 0.25rem 0.25rem;
+	margin: 0.15rem 0;
+	border-radius: 0.25rem;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	grid-gap: 0.25rem;
+}
+.view__post:hover {
+	background: var(--background-modifier-hover);
+}
+.view__post-title {
+	font-size: 1.25rem;
+	font-weight: 500;
+	margin: 0.25rem 0;
+}
+.view__post-content {
+	color: var(--text-muted);
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.view__post-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: var(--text-faint);
+}
+
+.view__post-actions {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 2rem);
+	grid-gap: 0.5rem;
+}
+.view__post-action {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 0.25rem;
+	padding: 0.25rem;
+	cursor: pointer;
+}
