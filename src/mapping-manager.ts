@@ -1,12 +1,12 @@
 import { Notice, TFile } from 'obsidian'
-import { type Plugin } from './plugin'
+import { type XlogAppPlugin } from './plugin'
 
 let hasInit = false
 
 export class MappingManager {
-	private readonly plugin: Plugin
+	private readonly plugin: XlogAppPlugin
 
-	constructor(plugin: Plugin) {
+	constructor(plugin: XlogAppPlugin) {
 		this.plugin = plugin
 
 		if (!hasInit) {
@@ -142,13 +142,7 @@ export class MappingManager {
 		}
 	}
 
-	private unlinkFile({
-		file,
-		slug,
-	}: {
-		file: TFile
-		slug: string
-	}) {
+	private unlinkFile({ file, slug }: { file: TFile; slug: string }) {
 		try {
 			// change properties
 			this.plugin.app.fileManager.processFrontMatter(file, (frontmatter) => {

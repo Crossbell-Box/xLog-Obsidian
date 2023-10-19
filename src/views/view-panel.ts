@@ -9,7 +9,7 @@ import {
 	parseFrontMatterEntry,
 	setIcon,
 } from 'obsidian'
-import { Plugin } from '../plugin'
+import { XlogAppPlugin } from '../plugin'
 import { PluginSettings } from '../setting'
 import { Indexer } from '../utils/api'
 import { ipfsUrlToHttpUrl } from '../utils/ipfs'
@@ -18,10 +18,10 @@ import { getLogoIconName, getLogoSvgText } from '../utils/logo'
 export const ObsidianXlogViewType = 'obsidian-xlog-view'
 
 export class ViewPanel extends ItemView {
-	private readonly plugin: Plugin
+	private readonly plugin: XlogAppPlugin
 	private readonly settings: PluginSettings
 
-	constructor(leaf: WorkspaceLeaf, plugin: Plugin) {
+	constructor(leaf: WorkspaceLeaf, plugin: XlogAppPlugin) {
 		super(leaf)
 		this.plugin = plugin
 		this.settings = plugin.settingTab.settings
@@ -191,7 +191,7 @@ export class ViewPanel extends ItemView {
 			// file.
 		})
 
-		return doc
+		// return doc
 	}
 }
 

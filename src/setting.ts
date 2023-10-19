@@ -1,5 +1,5 @@
 import { type App, Notice, PluginSettingTab, Setting } from 'obsidian'
-import { type Plugin } from './plugin'
+import { type XlogAppPlugin } from './plugin'
 
 export interface PluginSettings {
 	characterId?: number
@@ -24,10 +24,10 @@ const DEFAULT_SETTINGS: PluginSettings = {
  * ```
  */
 export class SettingTab extends PluginSettingTab {
-	plugin: Plugin
+	plugin: XlogAppPlugin
 	settings!: PluginSettings
 
-	constructor(app: App, plugin: Plugin) {
+	constructor(app: App, plugin: XlogAppPlugin) {
 		super(app, plugin)
 		this.plugin = plugin
 

@@ -1,11 +1,11 @@
 import { Notice } from 'obsidian'
 
-import { Plugin } from './plugin'
+import { XlogAppPlugin } from './plugin'
 
 export class StatusBarItem {
-	private plugin: Plugin
+	private plugin: XlogAppPlugin
 
-	constructor(plugin: Plugin) {
+	constructor(plugin: XlogAppPlugin) {
 		this.plugin = plugin
 
 		this.init()
