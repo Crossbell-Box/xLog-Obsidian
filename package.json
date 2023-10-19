@@ -1,31 +1,32 @@
 {
-	"name": "obsidian-xlog",
-	"version": "0.1.0",
-	"description": "Interacting with xLog in Obsidian",
-	"keywords": ["obsidian", "xlog"],
-	"license": "MIT",
-	"author": "Songkeys",
-	"main": "index.js",
-	"files": ["dist"],
-	"scripts": {
-		"format": "biome format . --write",
-		"lint": "biome check .",
-		"build:bun": "bun run ./build.ts",
-		"dev:bun": "NODE_ENV=development bun run build",
-		"build": "tsup",
-		"dev": "tsup --watch",
-		"version": "bun run ./scripts/version-bump.ts"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^1.2.2",
-		"@types/node": "^20.6.3",
-		"@types/web": "^0.0.115",
-		"bun-types": "^1.0.3",
-		"obsidian": "^1.4.11",
-		"tsup": "^7.2.0",
-		"typescript": "^5.2.2"
-	},
-	"dependencies": {
-		"crossbell": "^1.8.1"
-	}
+  "name": "obsidian-xlog",
+  "version": "0.1.0",
+  "description": "Interacting with xLog in Obsidian",
+  "keywords": ["obsidian", "xlog"],
+  "license": "MIT",
+  "author": "Songkeys",
+  "main": "index.js",
+  "files": ["dist"],
+  "scripts": {
+    "format": "biome format . --write",
+    "lint": "biome check .",
+    "build:bun": "bun run ./build.ts",
+    "dev:bun": "NODE_ENV=development bun run build",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "version": "bun run ./scripts/version-bump.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.2.2",
+    "@types/node": "^20.6.3",
+    "@types/web": "^0.0.115",
+    "bun-types": "^1.0.3",
+    "obsidian": "^1.4.11",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "crossbell": "^1.8.1",
+    "dotenv": "^16.3.1"
+  }
 }
