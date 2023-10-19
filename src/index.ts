@@ -1,3 +1,3 @@
-import { Plugin } from './plugin'
+import { XlogAppPlugin } from './plugin'
 
-export default Plugin
+export default XlogAppPlugin

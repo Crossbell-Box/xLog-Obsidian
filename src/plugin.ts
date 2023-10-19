@@ -1,4 +1,4 @@
-import { App, MarkdownView, Modal, Plugin as Plugin_ } from 'obsidian'
+import { App, MarkdownView, Modal, Plugin } from 'obsidian'
 import { MappingManager } from './mapping-manager'
 import { SettingTab } from './setting'
 import { StatusBarItem } from './status-bar-item'
@@ -7,7 +7,7 @@ import './utils/icons'
 import { addLogoIcon, getLogoIconName } from './utils/logo'
 import { ObsidianXlogViewType, ViewPanel } from './views/view-panel'
 
-export class Plugin extends Plugin_ {
+export class XlogAppPlugin extends Plugin {
 	public settingTab!: SettingTab
 	public indexer!: Indexer
 	public mappingManager!: MappingManager

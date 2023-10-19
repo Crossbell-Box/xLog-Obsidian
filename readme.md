@@ -6,23 +6,24 @@
 
 ### Development
 
-1. Clone this repository.
+#### Clone this repository
 
-2. Install deps.
+#### Install deps
 
 ```bash
 bun install
 ```
 
-2. Develop:
+### Develop
 
 ```bash
 mv .env.example .env
-echo 'OBSIDIAN_PLUGIN_PATH=YOUR-OB-VAULT-PATH/.obsidian/plugins'
+# 修改 YOUR-OB-VAULT-PATH 实际 vault 的路径
+echo 'OBSIDIAN_PLUGIN_PATH=YOUR-OB-VAULT-PATH/.obsidian/plugins' >> .env
 export OBSIDIAN_PLUGIN_DIR=~/obsidian/plugins
 bun run dev
 ```
 
-3. Bump version:
+#### Bump version:
 
 Change the version in `package.json` and run `bun run version`.
