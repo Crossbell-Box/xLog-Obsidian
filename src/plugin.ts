@@ -1,7 +1,7 @@
 import { App, MarkdownView, Modal, Plugin } from 'obsidian'
 import { MappingManager } from './mapping-manager'
 import { SettingTab } from './setting'
-import { StatusBarItem } from './status-bar-item'
+// import { StatusBarItem } from './status-bar-item'
 import { Indexer } from './utils/api'
 import './utils/icons'
 import { addLogoIcon, getLogoIconName } from './utils/logo'
@@ -33,7 +33,7 @@ export class XlogAppPlugin extends Plugin {
 		})
 
 		// Add a status bar item to the bottom of the app. Does not work on mobile apps.
-		new StatusBarItem(this)
+		// new StatusBarItem(this)
 
 		// This adds a simple command that can be triggered anywhere
 		this.addCommand({

@@ -1,27 +1,27 @@
-import { createIndexer } from "crossbell/indexer";
-import { Notice } from "obsidian";
-import { type Plugin } from "../plugin";
-import { type PluginSettings } from "../setting";
+import { createIndexer } from 'crossbell/indexer'
+import { Notice } from 'obsidian'
+import { type XlogAppPlugin } from '../plugin'
+import { type PluginSettings } from '../setting'
 
 export class Indexer {
-	private readonly plugin: Plugin;
-	private readonly settings: PluginSettings;
+	private readonly plugin: XlogAppPlugin
+	private readonly settings: PluginSettings
 
-	private readonly indexer = createIndexer({ experimentalRequestDedupe: true });
+	private readonly indexer = createIndexer({ experimentalRequestDedupe: true })
 
-	constructor(plugin: Plugin) {
-		this.plugin = plugin;
-		this.settings = this.plugin.settingTab.settings;
+	constructor(plugin: XlogAppPlugin) {
+		this.plugin = plugin
+		this.settings = this.plugin.settingTab.settings
 	}
 
 	public async getSiteInfo() {
-		this.init();
+		this.init()
 
-		const characterId = this.settings.characterId!;
-		const res = await this.indexer.character.get(characterId);
+		const characterId = this.settings.characterId!
+		const res = await this.indexer.character.get(characterId)
 		if (!res) {
-			new Notice(`No character found for ID ${characterId}.`);
-			throw new Error(`No character found for ID ${characterId}.`);
+			new Notice(`No character found for ID ${characterId}.`)
+			throw new Error(`No character found for ID ${characterId}.`)
 		}
 
 		const siteInfo = {
@@ -35,78 +35,79 @@ export class Indexer {
 			banner: res.metadata?.content?.banners?.[0],
 			siteName:
 				(res.metadata?.content?.attributes?.find(
-					(a) => a.trait_type === "xlog_site_name"
+					(a) => a.trait_type === 'xlog_site_name',
 				)?.value as string) || res.metadata?.content?.name,
 			domain:
 				(res.metadata?.content?.attributes?.find(
-					(a) => a.trait_type === "xlog_custom_domain"
+					(a) => a.trait_type === 'xlog_custom_domain',
 				)?.value as string) || `${res.handle}.xlog.app`,
-		};
+		}
 
-		return siteInfo;
+		return siteInfo
 	}
 
 	public async getPosts({ cursor }: { cursor?: string } = {}) {
-		this.init();
+		this.init()
 
-		const characterId = this.settings.characterId!;
+		const characterId = this.settings.characterId!
 		const notes = await this.indexer.note.getMany({
 			characterId: characterId,
-			tags: ["post"],
+			tags: ['post'],
 			limit: 500,
 			cursor,
-			orderBy: "publishedAt",
-			sources: "xlog",
-		});
+			orderBy: 'publishedAt',
+			sources: 'xlog',
+		})
 
 		const list = notes.list.map((note) => {
 			return {
 				...note,
 
 				slug: note.metadata?.content?.attributes?.find(
-					(a) => a.trait_type === "xlog_slug"
+					(a) => a.trait_type === 'xlog_slug',
 				)?.value as string,
 				cover: note.metadata?.content?.attachments?.find(
-					(a) => a.name === "cover"
+					(a) => a.name === 'cover',
 				)?.address,
 				tags: note.metadata?.content?.tags,
-			};
-		});
+			}
+		})
 
 		return {
 			list,
 			cursor: notes.cursor,
 			count: notes.count,
-		};
+		}
 	}
 
+	// entry
 	private init() {
 		// check login status
-		const characterId = this.settings.characterId;
+		const characterId = this.settings.characterId
 		if (!characterId) {
-			this.showLoginNotice();
-			throw new Error("not logged-in yet");
+			this.showLoginNotice()
+			throw new Error('not logged-in yet')
 		}
 
 		// init token
-		if (this.settings.accountType === "email") {
-			this.indexer.newbie.token = this.settings.token;
-		} else if (this.settings.accountType === "op") {
-			this.indexer.siwe.token = this.settings.token;
+		if (this.settings.accountType === 'email') {
+			this.indexer.newbie.token = this.settings.token
+		} else if (this.settings.accountType === 'op') {
+			this.indexer.siwe.token = this.settings.token
 		}
 	}
 
 	private getMutator() {
-		this.init();
+		this.init()
 
-		if (this.settings.accountType === "email") {
-			return this.indexer.newbie;
-		} else if (this.settings.accountType === "op") {
-			return this.indexer.siwe;
+		if (this.settings.accountType === 'email') {
+			return this.indexer.newbie
+		} else if (this.settings.accountType === 'op') {
+			return this.indexer.siwe
 		}
 	}
 
 	private showLoginNotice() {
-		new Notice("Please login to xLog first.");
+		new Notice('Please login to xLog first.')
 	}
 }

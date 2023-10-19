@@ -3,6 +3,13 @@ import { type XlogAppPlugin } from './plugin'
 
 let hasInit = false
 
+/**
+ * Class
+ * 全局 init 一次
+ * 1. 获得所有 md -> 获取 frontmatter.xlog_slug
+ * 2. 建立关联，修改 frontmatter
+ * 3. 尝试监听 metadata 变化
+ */
 export class MappingManager {
 	private readonly plugin: XlogAppPlugin
 
@@ -22,6 +29,7 @@ export class MappingManager {
 		this.registerHooks()
 	}
 
+	// from init
 	private indexFiles() {
 		// FIXME: I should skip if there is already a mapping in settings
 		//        But this may cause some problems when something changes during version upgrade
@@ -37,7 +45,9 @@ export class MappingManager {
 		}
 	}
 
+	// from init - indexFiles
 	private async handleFile(file: TFile) {
+		// get frontmatter.xlog_slug
 		const { metadataCache } = this.plugin.app
 		const fileCache = metadataCache.getFileCache(file)
 		if (!fileCache) {
@@ -52,11 +62,15 @@ export class MappingManager {
 		const { xlog_slug } = frontmatter
 		if (!xlog_slug) return
 
+		// get xlog.allPost
 		const posts = await this.plugin.indexer.getPosts()
+
+		// find target slug post
 		const post = posts.list.find((p) => p.slug === xlog_slug)
 
 		if (!post) return
 
+		// add linking
 		this.linkFile({
 			file,
 			slug: xlog_slug,
@@ -66,6 +80,7 @@ export class MappingManager {
 		})
 	}
 
+	// from init
 	private registerHooks() {
 		const { vault, metadataCache } = this.plugin.app
 
@@ -99,6 +114,7 @@ export class MappingManager {
 		this.plugin.app.workspace.getLeaf().openFile(file, { active: true })
 	}
 
+	// from init - indexFiles - handleFile
 	private async linkFile({
 		file,
 		slug,
@@ -113,7 +129,7 @@ export class MappingManager {
 		mtime?: number
 	}) {
 		try {
-			// change properties
+			// change frontmatter
 			await this.plugin.app.fileManager.processFrontMatter(
 				file,
 				(frontmatter) => {
@@ -130,7 +146,7 @@ export class MappingManager {
 				},
 			)
 
-			// save mapping
+			// eg: settings.postMapping = { slug: filepath }
 			this.plugin.settingTab.settings.postMapping ??= {}
 			this.plugin.settingTab.settings.postMapping[slug] = file.path
 			await this.plugin.settingTab.saveSettings()

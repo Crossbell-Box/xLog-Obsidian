@@ -67,7 +67,7 @@ export class SettingTab extends PluginSettingTab {
 
 		containerEl.empty()
 
-		containerEl.createEl('h2', { text: 'Settings for xLog plugin.' })
+		containerEl.createEl('h2', { text: 'Settings for xLog plugin' })
 
 		// login
 		const hasLoggedIn = !!this.settings.token
